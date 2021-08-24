@@ -71,7 +71,7 @@ def Calculate(hier_c, operation):
     hier_sdev = {}
     if operation == "sum": function = np.sum
     elif operation == "mean" or operation == "meanhalf": function = np.mean
-    for hier, l in hier_c.iteritems():
+    for hier, l in hier_c.items():
         hier_sdev[hier] = 0.0
         if operation == "meanhalf":
             l.sort()
@@ -85,7 +85,7 @@ def CalcHierarchy(mapping, annotations, coverage, operation, limit, verbose):
     ann_c = {}
     if len(coverage.keys()) > 0: cov = True
     else: cov = False
-    for annotation, l in annotations.iteritems():
+    for annotation, l in annotations.items():
         covlist = []
         if cov:
             for gene in l:
@@ -96,7 +96,7 @@ def CalcHierarchy(mapping, annotations, coverage, operation, limit, verbose):
         else: ann_c[annotation] = len(l)
     ## Transfer annotation sums to nearest parent in mapping, if limit is supplied skip parents in limit
     hier_c = {}
-    for annotation, count in ann_c.iteritems():
+    for annotation, count in ann_c.items():
 
         try: parents = mapping[annotation]
         except KeyError:
@@ -177,7 +177,7 @@ def main():
         sdevout = open(args.sdev, 'w')
         sdevout.write("X.sdev\t"+name+"\n")
 
-    for hier,count in hier_counts.iteritems():
+    for hier,count in hier_counts.items():
         out = [count]
         try: h = hierarchy[hier]
         except KeyError: h = ["Unknown"]
